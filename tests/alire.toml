@@ -1,0 +1,19 @@
+name = "tests"
+description = ""
+version = "0.1.0-dev"
+
+authors = ["AJ Ianozi"]
+maintainers = ["AJ Ianozi <aj@ianozi.com>"]
+maintainers-logins = ["aj-ianozi"]
+licenses = "MIT"
+website = ""
+tags = []
+
+executables = ["tests"]
+
+[[depends-on]]
+uuids = "*"
+
+[[pins]]
+uuids = { path = "../"  }
+

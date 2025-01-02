@@ -1,0 +1,13 @@
+name = "uuids"
+description = "Implementations of RFC 9562 Universally Unique IDentifiers (UUIDs)"
+version = "0.1.0-dev"
+
+authors = ["AJ Ianozi"]
+maintainers = ["AJ Ianozi <aj@ianozi.com>"]
+maintainers-logins = ["aj-ianozi"]
+licenses = "MIT"
+website = ""
+tags = ["uuid", "guid"]
+
+[[depends-on]]
+system_random = "^1.0.0"
