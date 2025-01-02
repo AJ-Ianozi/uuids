@@ -15,7 +15,7 @@ with UUIDs.V4;
 with UUIDs.v5;
 declare
    My_UUID_4 : constant UUID := UUIDs.V4.Create;
-   My_UUID_5 : constant UUID := V5.Create (UUID_DNS, "example.org");
+   My_UUID_5 : constant UUID := V5.Create (UUIDs.UUID_DNS, "example.org");
 begin
    --  This will print a random UUID
    Put_Line (My_UUID_4'Image);
