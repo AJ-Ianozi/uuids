@@ -1,19 +1,12 @@
 pragma Ada_2022;
-with System_Random;
-with Ada.Streams;
-with Ada.Real_Time;
 with Ada.Calendar;
 with Ada.Calendar.Conversions;
-with Interfaces.C;
 with Ada.Calendar.Formatting;
-with Ada.Unchecked_Conversion;
 package body UUIDs.V7 is
-   use type Interfaces.C.long_long;
    use Interfaces;
-   use Randomizer;
    use Ada.Calendar;
    use Ada.Calendar.Conversions;
-   function Create return UUID is
+   function UUID7 return UUID is
       --  Generate random data for uuid
        type Rand_AB is array (6 .. 15) of aliased Octet;
       Rando : constant Rand_AB :=
@@ -28,7 +21,7 @@ package body UUIDs.V7 is
       Unix_TS_Low : constant Unsigned_16 := 
          Unsigned_16 (Unix_TS_MS and 16#FFFF#);
       --  Generate the TS uuid, and fill octlets 6 through 15 with random data
-      Result : UUID := (Fields => [
+      Result : UUID := From_Field ([
          0 => Octet (Shift_Right (Unix_TS_High, 24) and 16#FF#),
          1 => Octet (Shift_Right (Unix_TS_High, 16) and 16#FF#),
          2 => Octet (Shift_Right (Unix_TS_High, 8) and 16#FF#),
@@ -39,5 +32,5 @@ package body UUIDs.V7 is
    begin
       Normalize (Result, Unix_Time);
       return Result;
-   end Create;
+   end UUID7;
 end UUIDs.V7;
