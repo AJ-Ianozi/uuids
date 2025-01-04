@@ -5,6 +5,7 @@
 .DS_Store
 Thumbs.db
 *~
+tags
 .fuse_hidden*
 .directory
 .Trash-*
