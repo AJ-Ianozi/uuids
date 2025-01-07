@@ -1,7 +1,6 @@
 pragma Ada_2022;
 with Ada.Calendar;
 with Ada.Calendar.Conversions;
-with Ada.Calendar.Formatting;
 package body UUIDs.V7 is
    use Interfaces;
    use Ada.Calendar;

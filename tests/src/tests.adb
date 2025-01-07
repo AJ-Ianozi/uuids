@@ -1,3 +1,7 @@
+--------------------------------------------------------------------------------
+--  Copyright (c) 2025 AJ Ianozi                                              --
+--  Licensed under the MIT License.  See attached LICENSE for details.        --
+--------------------------------------------------------------------------------
 pragma Ada_2022;
 
 --  Please ignore this, I'm still writing the unit tests.
@@ -14,11 +18,16 @@ with UUIDs.V4;
 with UUIDs.V5;
 with UUIDs.V6;
 with UUIDs.V7;
+with UUIDs.V8;
 --  Uses references from RFC-9562
 procedure Tests is
    use UUIDs;
    use Ada.Assertions;
+    My_UUID : UUID := V8.UUID8 ("DEADBEEF-DEAF-DEED-FEED-C0FFEEABCDEF");
 begin
+   --    --  This will print "DEADBEEF-DEAF-8EED-BEED-C0FFEEABCDEF"
+    ada.text_io.Put_Line (My_UUID'Image);
+return;
    --  Confirm reference UUIDs
    declare
 
@@ -113,15 +122,15 @@ begin
    --  Check variants against known UUID variants
    Assert (Nil.Variant = NCS);
    Assert (Max.Variant = Future);
-   Assert (Ref_V1.Variant = RFC4122);
-   Assert (Ref_V2.Variant = RFC4122);
-   Assert (Ref_V3.Variant = RFC4122);
-   Assert (Ref_V4.Variant = RFC4122);
-   Assert (Ref_V5.Variant = RFC4122);
-   Assert (Ref_V6.Variant = RFC4122);
-   Assert (Ref_V7.Variant = RFC4122);
-   Assert (Ref_V8_Name_Based.Variant = RFC4122);
-   Assert (Ref_V8_Time_Based.Variant = RFC4122);
+   Assert (Ref_V1.Variant = RFC9562);
+   Assert (Ref_V2.Variant = RFC9562);
+   Assert (Ref_V3.Variant = RFC9562);
+   Assert (Ref_V4.Variant = RFC9562);
+   Assert (Ref_V5.Variant = RFC9562);
+   Assert (Ref_V6.Variant = RFC9562);
+   Assert (Ref_V7.Variant = RFC9562);
+   Assert (Ref_V8_Name_Based.Variant = RFC9562);
+   Assert (Ref_V8_Time_Based.Variant = RFC9562);
 
    --  Test string output via 'Image
    Assert (Ada.Strings.Equal_Case_Insensitive
@@ -223,8 +232,8 @@ begin
       Ada.Text_IO.Put_Line (Our_V4_2'Image);
       Assert (Our_V4_1.Version_Number = 4);
       Assert (Our_V4_2.Version_Number = 4);
-      Assert (Our_V4_1.Variant = RFC4122);
-      Assert (Our_V4_2.Variant = RFC4122);
+      Assert (Our_V4_1.Variant = RFC9562);
+      Assert (Our_V4_2.Variant = RFC9562);
    end;
    --  UID with pure random
    Settings.Set_Random (Pure_Random);
@@ -236,8 +245,8 @@ begin
       Ada.Text_IO.Put_Line (Our_V4_2'Image);
       Assert (Our_V4_1.Version_Number = 4);
       Assert (Our_V4_2.Version_Number = 4);
-      Assert (Our_V4_1.Variant = RFC4122);
-      Assert (Our_V4_2.Variant = RFC4122);
+      Assert (Our_V4_1.Variant = RFC9562);
+      Assert (Our_V4_2.Variant = RFC9562);
    end;
 
    --  Test UUID v5

@@ -145,7 +145,7 @@ package body UUIDs is
 --  Returns the variant of the UUID
    function Variant (Self : UUID) return Variants is
       (if    (Self.Data (8) and 16#80#) = 16#00# then NCS
-       elsif (Self.Data (8) and 16#c0#) = 16#80# then RFC4122
+       elsif (Self.Data (8) and 16#c0#) = 16#80# then RFC9562
        elsif (Self.Data (8) and 16#e0#) = 16#c0# then Microsoft
        else                                             Future);
 

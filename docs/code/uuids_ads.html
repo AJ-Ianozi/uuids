@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="./robodoc.css" type="text/css" />
+<script src="./robodoc.js"></script>
+<title>uuids.ads</title>
+<!-- Source: ./src/uuids.ads -->
+<!-- Generated with ROBODoc Version 4.99.44 (Jan 30 2021) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc">UUIDs</a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="./toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="./sources.html#top">Source files</a>
+<a class="menuitem" href="./index.html#top">Index</a>
+<a class="menuitem" href="./robo_class.html#top">Class</a>
+<a class="menuitem" href="./robo_constants.html#top">Constants</a>
+<a class="menuitem" href="./robo_subprograms.html#top">Subprograms</a>
+<a class="menuitem" href="./robo_packages.html#top">Packages</a>
+<a class="menuitem" href="./robo_methods.html#top">Methods</a>
+<a class="menuitem" href="./robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<h3>TABLE OF CONTENTS</h3>
+<ul>
+<li>1. <a href="#robo2">UUIDs/UUIDs</a></li>
+<ul>
+<li>1.1. <a href="#robo0">UUIDs/Settings</a></li>
+<ul>
+<li>1.1.1. <a href="#robo17">Settings/Settings.Get_Random</a></li>
+<li>1.1.2. <a href="#robo18">Settings/Settings.Set_Random</a></li>
+</ul>
+<li>1.2. <a href="#robo1">UUIDs/UUIDs.UUID</a></li>
+<ul>
+<li>1.2.1. <a href="#robo19">UUIDs.UUID/As_Element_Array</a></li>
+<li>1.2.2. <a href="#robo20">UUIDs.UUID/As_Field</a></li>
+<li>1.2.3. <a href="#robo21">UUIDs.UUID/Is_Max</a></li>
+<li>1.2.4. <a href="#robo22">UUIDs.UUID/Is_Nil</a></li>
+<li>1.2.5. <a href="#robo23">UUIDs.UUID/Variant</a></li>
+<li>1.2.6. <a href="#robo24">UUIDs.UUID/Version</a></li>
+<li>1.2.7. <a href="#robo25">UUIDs.UUID/Version_Number</a></li>
+</ul>
+<li>1.3. <a href="./uuids-v1_ads.html#robo3">UUIDs/UUIDs.V1</a></li>
+<ul>
+<li>1.3.1. <a href="./uuids-v1_ads.html#robo32">UUIDs.V1/V1.UUID1</a></li>
+</ul>
+<li>1.4. <a href="./uuids-v3_ads.html#robo4">UUIDs/UUIDs.V3</a></li>
+<ul>
+<li>1.4.1. <a href="./uuids-v3_ads.html#robo33">UUIDs.V3/V3.UUID3</a></li>
+</ul>
+<li>1.5. <a href="./uuids-v4_ads.html#robo5">UUIDs/UUIDs.V4</a></li>
+<ul>
+<li>1.5.1. <a href="./uuids-v4_ads.html#robo34">UUIDs.V4/V4.UUID4</a></li>
+</ul>
+<li>1.6. <a href="./uuids-v5_ads.html#robo6">UUIDs/UUIDs.V5</a></li>
+<ul>
+<li>1.6.1. <a href="./uuids-v5_ads.html#robo35">UUIDs.V5/V5.UUID5</a></li>
+</ul>
+<li>1.7. <a href="./uuids-v6_ads.html#robo7">UUIDs/UUIDs.V6</a></li>
+<ul>
+<li>1.7.1. <a href="./uuids-v6_ads.html#robo36">UUIDs.V6/V6.UUID6</a></li>
+</ul>
+<li>1.8. <a href="./uuids-v7_ads.html#robo8">UUIDs/UUIDs.V7</a></li>
+<ul>
+<li>1.8.1. <a href="./uuids-v7_ads.html#robo37">UUIDs.V7/V7.UUID7</a></li>
+</ul>
+<li>1.9. <a href="./uuids-v8_ads.html#robo9">UUIDs/UUIDs.V8</a></li>
+<ul>
+<li>1.9.1. <a href="./uuids-v8_ads.html#robo38">UUIDs.V8/V8.UUID8</a></li>
+</ul>
+<li>1.10. <a href="#robo10">UUIDs/UUIDs.Octet</a></li>
+<li>1.11. <a href="#robo11">UUIDs/UUIDs.Octet_String</a></li>
+<li>1.12. <a href="#robo12">UUIDs/UUIDs.Random_Method</a></li>
+<li>1.13. <a href="#robo13">UUIDs/UUIDs.UUID_Field</a></li>
+<li>1.14. <a href="#robo14">UUIDs/UUIDs.UUID_String</a></li>
+<li>1.15. <a href="#robo15">UUIDs/UUIDs.Variants</a></li>
+<li>1.16. <a href="#robo16">UUIDs/UUIDs.Versions</a></li>
+<li>1.17. <a href="#robo26">UUIDs/UUIDs.Library_Version</a></li>
+<li>1.18. <a href="#robo27">UUIDs/UUIDs.Max</a></li>
+<li>1.19. <a href="#robo28">UUIDs/UUIDs.Namespace_UUIDs</a></li>
+<li>1.20. <a href="#robo29">UUIDs/UUIDs.Nil</a></li>
+<li>1.21. <a href="#robo30">UUIDs/UUIDs.Reference_UUIDs</a></li>
+<li>1.22. <a href="#robo31">UUIDs/UUIDs.Version_N</a></li>
+<li>1.23. <a href="#robo39">UUIDs/UUIDs.From_Field</a></li>
+<li>1.24. <a href="#robo40">UUIDs/UUIDs.From_Stream_Element_Array</a></li>
+<li>1.25. <a href="#robo41">UUIDs/UUIDs.From_String</a></li>
+<li>1.26. <a href="#robo42">UUIDs/UUIDs.Version_Number</a></li>
+</ul>
+</ul>
+<hr />
+<a name="UUIDs2fSettings"></a>
+<a name="robo0"></a><h2>UUIDs/Settings [ Class ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_class.html#robo_top_of_doc">Class</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Thread-safe object to accept change various settings in how the
+    library behaves.  Currently this is only being used to change the way
+    the random number generator works, which is by default pseudorandom.
+  METHODS:
+    * <strong>Settings</strong>/<a href="#robo18">Settings.Set_Random</a>
+    * <strong>Settings</strong>/<a href="#robo17">Settings.Get_Random</a>
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">protected</span> <strong>Settings</strong> <span class="keyword">is</span>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eUUID"></a>
+<a name="robo1"></a><h2>UUIDs/UUIDs.UUID [ Class ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_class.html#robo_top_of_doc">Class</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Universally Unique IDentifier (UUID) described in RFC-9562:
+    <a href="https://www.ietf.org/rfc/rfc9562.html#section-4">https://www.ietf.org/rfc/rfc9562.html#section-4</a>
+    Internally the UUID holds a 128-bit field (octets 0 through 15) and
+    can store <a href="#robo2">UUIDs</a> versions 1 through 8 in this field.
+    A UUID can be represented as a string using the 'Image attribute.
+    The default value of a UUID on initialization is
+    Nil (00000000-0000-0000-0000-000000000000)
+</pre>
+<p class="item_name">USAGE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    U1 <span class="sign">:</span> UUID <span class="sign">:</span><span class="sign">=</span> From_String <span class="sign">(</span><span class="quote">"6ba7b810-9dad-11d1-80b4-00c04fd430c8"</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    U2 <span class="sign">:</span> UUID <span class="sign">:</span><span class="sign">=</span> From_Field <span class="sign">(</span><span class="sign">[</span>16<span class="sign">#</span>6b<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>a7<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>b8<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>10<span class="sign">#</span><span class="sign">,</span>
+   <span class="sign">-</span><span class="sign">-</span>                             16<span class="sign">#</span>9d<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>ad<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>11<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>d1<span class="sign">#</span><span class="sign">,</span>
+   <span class="sign">-</span><span class="sign">-</span>                             16<span class="sign">#</span>80<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>b4<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>00<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>c0<span class="sign">#</span><span class="sign">,</span>
+   <span class="sign">-</span><span class="sign">-</span>                             16<span class="sign">#</span>4f<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>d4<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>30<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>c8<span class="sign">#</span><span class="sign">]</span><span class="sign">)</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> U1 <span class="sign">=</span> U2 <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       <span class="sign">-</span><span class="sign">-</span>  This will print<span class="sign">:</span> <span class="quote">"They're 6BA7B810-9DAD-11D1-80B4-00C04FD430C8"</span>
+   <span class="sign">-</span><span class="sign">-</span>       Put_Line <span class="sign">(</span><span class="quote">"They're "</span> <span class="sign">&amp;</span> U1<span class="squote">'Image);
+   --    end if;
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   type UUID is tagged private;
+</pre>
+<p class="item_name">SEE ALSO</p>
+<pre>  * <a href="#robo2">UUIDs</a>/<a href="#robo41">UUIDs.From_String</a>
+  * <a href="#robo2">UUIDs</a>/<a href="#robo39">UUIDs.From_Field</a>
+  * <a href="#robo2">UUIDs</a>/<a href="#robo40">UUIDs.From_Stream_Element_Array</a>
+  * V1/<a href="./uuids-v1_ads.html#robo32">V1.UUID1</a>
+  * V3/<a href="./uuids-v3_ads.html#robo33">V3.UUID3</a>
+  * V4/<a href="./uuids-v4_ads.html#robo34">V4.UUID4</a>
+  * V5/<a href="./uuids-v5_ads.html#robo35">V5.UUID5</a>
+  * V6/<a href="./uuids-v6_ads.html#robo36">V6.UUID6</a>
+  * V7/<a href="./uuids-v7_ads.html#robo37">V7.UUID7</a>
+  * V8/<a href="./uuids-v8_ads.html#robo38">V8.UUID8</a>
+</pre>
+<p class="item_name">METHODS</p>
+<pre>  * <strong>UUIDs.UUID</strong>/<a href="#robo20">As_Field</a>
+  * <strong>UUIDs.UUID</strong>/<a href="#robo19">As_Element_Array</a>
+  * <strong>UUIDs.UUID</strong>/<a href="#robo24">Version</a>
+  * <strong>UUIDs.UUID</strong>/<a href="#robo25">Version_Number</a>
+  * <strong>UUIDs.UUID</strong>/<a href="#robo23">Variant</a>
+  * <strong>UUIDs.UUID</strong>/<a href="#robo22">Is_Nil</a>
+  * <strong>UUIDs.UUID</strong>/<a href="#robo21">Is_Max</a>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs"></a>
+<a name="robo2"></a><h2>UUIDs/UUIDs [ Packages ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="./robo_packages.html#robo_top_of_doc">Packages</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    This package provides an implementation of RFC-9562 which specify
+    Universally Unique IDentifiers (or <strong>UUIDs</strong>) described here:
+    <a href="https://www.ietf.org/rfc/rfc9562.html">https://www.ietf.org/rfc/rfc9562.html</a>
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source"><span class="keyword">package</span> <strong>UUIDs</strong> <span class="keyword">is</span>
+</pre>
+<p class="item_name">PORTABILITY</p>
+<pre>    This library utilezes Ada-2022 and some GNAT-specific libraries, such as:
+    * GNAT.MD5 for <strong>UUIDs</strong>/V3
+    * GNAT.SHA1 for <strong>UUIDs</strong>/v5
+    * Ada.Calendar.Conversions for <strong>UUIDs</strong>/v1 <strong>UUIDs</strong>/v6 and <strong>UUIDs</strong>/v7
+    If I can find a way to securely accomplish MD5, SHA1, and retrieving the
+    UNIX time without these three above, this may change in the future.
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eOctet"></a>
+<a name="robo10"></a><h2>UUIDs/UUIDs.Octet [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    A single 8-bit item in a UUID
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">subtype</span> Octet <span class="keyword">is</span> Interfaces<span class="sign">.</span>Unsigned_8<span class="sign">;</span>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eOctet5fString"></a>
+<a name="robo11"></a><h2>UUIDs/UUIDs.Octet_String [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Correctly-formatted octet in hex
+    Used for validation purposes.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">subtype</span> Octet_String <span class="keyword">is</span> String <span class="sign">(</span>1 <span class="sign">.</span><span class="sign">.</span> 2<span class="sign">)</span>
+      <span class="keyword">with</span> Dynamic_Predicate <span class="sign">=</span><span class="sign">&gt;</span>
+         <span class="sign">(</span><span class="keyword">for</span> <span class="keyword">all</span> C <span class="keyword">of</span> Octet_String <span class="sign">=</span><span class="sign">&gt;</span>
+            C <span class="keyword">in</span> <span class="squote">'0'</span> <span class="sign">.</span><span class="sign">.</span> <span class="squote">'9'</span> <span class="sign">|</span> <span class="squote">'A'</span> <span class="sign">.</span><span class="sign">.</span> <span class="squote">'F'</span> <span class="sign">|</span> <span class="squote">'a'</span> <span class="sign">.</span><span class="sign">.</span> <span class="squote">'f'</span><span class="sign">)</span><span class="sign">;</span>
+</pre>
+<p class="item_name">DERIVED FROM</p>
+<pre>    String
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eRandom5fMethod"></a>
+<a name="robo12"></a><h2>UUIDs/UUIDs.Random_Method [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>     An enumeration of options passed into <a href="#robo2">UUIDs</a>.<a href="#robo18">Settings.Set_Random</a>
+    to choose whith method will generate random data.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> Random_Method <span class="keyword">is</span> <span class="sign">(</span>
+      Random_Seed<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Uses Ada<span class="sign">.</span>Numerics<span class="sign">.</span>Discrete_Random<span class="sign">,</span> seeded by system<span class="squote">'s
+                   --  source of randomness.
+
+      Pure_Random --  Only use the system'</span>s source <span class="keyword">of</span> randomness<span class="sign">.</span>
+      <span class="sign">)</span><span class="sign">;</span>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eUUID5fField"></a>
+<a name="robo13"></a><h2>UUIDs/UUIDs.UUID_Field [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    This is the full 128-bit field of a UUID stored in 16 octets, index
+    from 0 to 15 as described here:
+    <a href="https://www.ietf.org/rfc/rfc9562.html#section-4">https://www.ietf.org/rfc/rfc9562.html#section-4</a>
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> UUID_Field <span class="keyword">is</span> <span class="keyword">array</span> <span class="sign">(</span>0 <span class="sign">.</span><span class="sign">.</span> 15<span class="sign">)</span> <span class="keyword">of</span> Octet <span class="keyword">with</span> Size <span class="sign">=</span><span class="sign">&gt;</span> 128<span class="sign">;</span>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eUUID5fString"></a>
+<a name="robo14"></a><h2>UUIDs/UUIDs.UUID_String [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Correctly-formatted UUID String in hex, the format of:
+    xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    Used for validation purposes.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">subtype</span> UUID_String <span class="keyword">is</span> String <span class="sign">(</span>1 <span class="sign">.</span><span class="sign">.</span> 36<span class="sign">)</span>
+      <span class="keyword">with</span> Dynamic_Predicate <span class="sign">=</span><span class="sign">&gt;</span>
+         UUID_String <span class="sign">(</span>9<span class="sign">)</span> <span class="sign">=</span> <span class="squote">'-'</span> <span class="keyword">and</span> <span class="keyword">then</span>
+         UUID_String <span class="sign">(</span>14<span class="sign">)</span> <span class="sign">=</span> <span class="squote">'-'</span> <span class="keyword">and</span> <span class="keyword">then</span>
+         UUID_String <span class="sign">(</span>19<span class="sign">)</span> <span class="sign">=</span> <span class="squote">'-'</span> <span class="keyword">and</span> <span class="keyword">then</span>
+         UUID_String <span class="sign">(</span>24<span class="sign">)</span> <span class="sign">=</span> <span class="squote">'-'</span> <span class="keyword">and</span> <span class="keyword">then</span>
+         <span class="sign">(</span><span class="keyword">for</span> <span class="keyword">all</span> C <span class="keyword">of</span> UUID_String <span class="sign">=</span><span class="sign">&gt;</span>
+            C <span class="keyword">in</span> <span class="squote">'-'</span> <span class="sign">|</span> <span class="squote">'0'</span> <span class="sign">.</span><span class="sign">.</span> <span class="squote">'9'</span> <span class="sign">|</span> <span class="squote">'A'</span> <span class="sign">.</span><span class="sign">.</span> <span class="squote">'F'</span> <span class="sign">|</span> <span class="squote">'a'</span> <span class="sign">.</span><span class="sign">.</span> <span class="squote">'f'</span><span class="sign">)</span><span class="sign">;</span>
+</pre>
+<p class="item_name">DERIVED FROM</p>
+<pre>    String
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eVariants"></a>
+<a name="robo15"></a><h2>UUIDs/UUIDs.Variants [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Enumerations of UUID Variants defined at:
+    <a href="https://www.ietf.org/rfc/rfc9562.html#section-4.1">https://www.ietf.org/rfc/rfc9562.html#section-4.1</a>
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> Variants <span class="keyword">is</span> <span class="sign">(</span>
+      NCS<span class="sign">,</span>       <span class="sign">-</span><span class="sign">-</span>  Network Computing System <span class="sign">(</span>NCS<span class="sign">)</span> backward compatibility
+      RFC9562<span class="sign">,</span>   <span class="sign">-</span><span class="sign">-</span>  RFC 9562 <a href="#robo2">UUIDs</a>
+      Microsoft<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  Microsoft Corporation backward compatibility<span class="sign">.</span>
+      Future<span class="sign">)</span><span class="sign">;</span>   <span class="sign">-</span><span class="sign">-</span>  Reserved <span class="keyword">for</span> future definition
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eVersions"></a>
+<a name="robo16"></a><h2>UUIDs/UUIDs.Versions [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Enumerations of UUID Versions defined at:
+    <a href="https://www.ietf.org/rfc/rfc9562.html#section-4.2">https://www.ietf.org/rfc/rfc9562.html#section-4.2</a>
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">type</span> Versions <span class="keyword">is</span> <span class="sign">(</span>
+      Unknown<span class="sign">,</span>             <span class="sign">-</span><span class="sign">-</span>  No version <span class="sign">/</span> <span class="keyword">not</span> to spec
+      Gregorian<span class="sign">,</span>           <span class="sign">-</span><span class="sign">-</span>  UUIDv1<span class="sign">:</span> Gregorian Time<span class="sign">-</span>based
+      DCE<span class="sign">,</span>                 <span class="sign">-</span><span class="sign">-</span>  UUIDv2<span class="sign">:</span> DCE Security
+      MD5<span class="sign">,</span>                 <span class="sign">-</span><span class="sign">-</span>  UUIDv3<span class="sign">:</span> MD5 Name<span class="sign">-</span>based
+      Random<span class="sign">,</span>              <span class="sign">-</span><span class="sign">-</span>  UUIDv4<span class="sign">:</span> Pure random
+      SHA_1<span class="sign">,</span>               <span class="sign">-</span><span class="sign">-</span>  UUIDv5<span class="sign">:</span> SHA<span class="sign">-</span>1 Name<span class="sign">-</span>based
+      Gregorian_Reordered<span class="sign">,</span> <span class="sign">-</span><span class="sign">-</span>  UUIDv6<span class="sign">:</span> Reordered Gregorian Time<span class="sign">-</span>based
+      Unix_Time<span class="sign">,</span>           <span class="sign">-</span><span class="sign">-</span>  UUIDv7<span class="sign">:</span> Unix Time<span class="sign">-</span>based
+      Custom<span class="sign">)</span><span class="sign">;</span>             <span class="sign">-</span><span class="sign">-</span>  UUIDv8<span class="sign">:</span> Custom version
+</pre>
+<p class="item_name">SEE ALSO</p>
+<pre>    * <a href="#robo2">UUIDs</a>/<a href="#robo42">UUIDs.Version_Number</a>
+    * <a href="#robo2">UUIDs</a>/<a href="#robo31">UUIDs.Version_N</a>
+</pre>
+
+<hr />
+<a name="Settings2fSettings2eGet5fRandom"></a>
+<a name="robo17"></a><h2>Settings/Settings.Get_Random [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Settings</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">USAGE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  Set the random number generator to random seed <span class="keyword">if</span> needed
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> <strong>Settings.Get_Random</strong> <span class="sign">=</span> Pure_Random <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       <a href="#robo18">Settings.Set_Random</a> <span class="sign">(</span>Random_Seed<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span> <span class="keyword">if</span><span class="sign">;</span>
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">      <span class="keyword">function</span>  Get_Random <span class="keyword">return</span> Random_Method<span class="sign">;</span>
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    <a href="#robo2">UUIDs</a>/Random_Method:
+       * Random_Seed if using Ada.Numerics.Discrete_Random
+       * Pure_Random if using system's blocking RNG
+</pre>
+<p class="item_name">SEE ALSO</p>
+<pre>    * <a href="#robo0">Settings</a>/<a href="#robo18">Settings.Set_Random</a>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Return which method is currently driving the library's random number
+    generator.
+</pre>
+
+<hr />
+<a name="Settings2fSettings2eSet5fRandom"></a>
+<a name="robo18"></a><h2>Settings/Settings.Set_Random [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo0">Settings</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">USAGE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  Use Ada<span class="sign">.</span>Numerics<span class="sign">.</span>Discrete_Random<span class="sign">,</span> seeded by pure random data<span class="sign">:</span>
+   <span class="sign">-</span><span class="sign">-</span>    <strong>Settings.Set_Random</strong> <span class="sign">(</span>Random_Seed<span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  Use System_Random<span class="squote">'s pure random data for all random requests:
+   --    <strong>Settings.Set_Random</strong> (Pure_Random);
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">      procedure Set_Random (
+            Which : Random_Method); -- The method of randomness to start using.
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    Which - The method that will generate random data.
+</pre>
+<p class="item_name">SEE ALSO</p>
+<pre>    * <a href="#robo0">Settings</a>/<a href="#robo17">Settings.Get_Random</a>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    By default, the library uses Ada's built in pseudorandom number
+    generator which is seeded by a cryptographically secure source of
+    randomness provided by the system.  However, if ALL random data should
+    be provided by the system, this procedure can be used to initate that
+    setting.  Calling the system's random number generator will be a
+    blocking statement, however, so this should only be used if absolutely
+    needed.
+</pre>
+
+<hr />
+<a name="UUIDs2eUUID2fAs5fElement5fArray"></a>
+<a name="robo19"></a><h2>UUIDs.UUID/As_Element_Array [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">UUIDs.UUID</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>As_Element_Array</strong>
+      <span class="sign">(</span>Self <span class="sign">:</span> UUID<span class="sign">)</span> <span class="sign">-</span><span class="sign">-</span>  The current UUID
+      <span class="keyword">return</span> Ada<span class="sign">.</span>Streams<span class="sign">.</span>Stream_Element_Array<span class="sign">;</span> <span class="sign">-</span><span class="sign">-</span>  Raw data as element <span class="keyword">array</span>
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    Ada.Streams.Stream_Element_Array - Raw dat as element array
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Returns the raw 128-bit UUID field as a Stream_Element_Array
+</pre>
+
+<hr />
+<a name="UUIDs2eUUID2fAs5fField"></a>
+<a name="robo20"></a><h2>UUIDs.UUID/As_Field [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">UUIDs.UUID</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>As_Field</strong> <span class="sign">(</span>Self <span class="sign">:</span> UUID<span class="sign">)</span> <span class="keyword">return</span> UUID_Field <span class="keyword">with</span> Inline<span class="sign">;</span>
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    <a href="#robo13">UUIDs.UUID_Field</a> - The raw UUID field
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Returns the raw 128-bit UUID field as an array of 16 ocets
+</pre>
+
+<hr />
+<a name="UUIDs2eUUID2fIs5fMax"></a>
+<a name="robo21"></a><h2>UUIDs.UUID/Is_Max [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">UUIDs.UUID</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Is_Max</strong> <span class="sign">(</span>Self <span class="sign">:</span> UUID<span class="sign">)</span> <span class="keyword">return</span> Boolean<span class="sign">;</span>
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    Boolean:
+       * True if UUID is Max (FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF)
+       * False if otherwise.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> My_UUID<span class="sign">.</span><strong>Is_Max</strong> <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       Put_Line <span class="sign">(</span><span class="quote">"This contains all Fs!"</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span> <span class="keyword">if</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Returns whether or not the current UUID is Max, defined at
+    <a href="https://www.ietf.org/rfc/rfc9562.html#section-5.10">https://www.ietf.org/rfc/rfc9562.html#section-5.10</a>
+</pre>
+
+<hr />
+<a name="UUIDs2eUUID2fIs5fNil"></a>
+<a name="robo22"></a><h2>UUIDs.UUID/Is_Nil [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">UUIDs.UUID</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Is_Nil</strong> <span class="sign">(</span>Self <span class="sign">:</span> UUID<span class="sign">)</span> <span class="keyword">return</span> Boolean<span class="sign">;</span>
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    Boolean:
+       * True if UUID is Nil (00000000-0000-0000-0000-000000000000)
+       * Falseif  otherwise.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> My_UUID<span class="sign">.</span><strong>Is_Nil</strong> <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       Put_Line <span class="sign">(</span><span class="quote">"This is an empty UUID!"</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span> <span class="keyword">if</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Returns whether or not the current UUID is Nil, defined at
+    <a href="https://www.ietf.org/rfc/rfc9562.html#section-5.9">https://www.ietf.org/rfc/rfc9562.html#section-5.9</a>
+</pre>
+
+<hr />
+<a name="UUIDs2eUUID2fVariant"></a>
+<a name="robo23"></a><h2>UUIDs.UUID/Variant [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">UUIDs.UUID</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Variant</strong> <span class="sign">(</span>Self <span class="sign">:</span> UUID<span class="sign">)</span> <span class="keyword">return</span> Variants<span class="sign">;</span>
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    <a href="#robo2">UUIDs</a>.<strong>Variant</strong> - The specific variant of the current UUID.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> My_UUID<span class="sign">.</span><strong>Variant</strong> <span class="sign">=</span> RFC9562 <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       Put_Line <span class="sign">(</span><span class="quote">"This UUID is supported by RFC-9562"</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span> <span class="keyword">if</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Returns the variant of the UUID
+</pre>
+
+<hr />
+<a name="UUIDs2eUUID2fVersion"></a>
+<a name="robo24"></a><h2>UUIDs.UUID/Version [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">UUIDs.UUID</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Version</strong> <span class="sign">(</span>Self <span class="sign">:</span> UUID<span class="sign">)</span> <span class="keyword">return</span> Versions<span class="sign">;</span>
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    <a href="#robo16">UUIDs.Versions</a> - The specific version of the current UUID or "Unknown"
+                      if the version is not known.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> My_UUID<span class="sign">.</span><strong>Version</strong> <span class="sign">=</span> Random <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       Put_Line <span class="sign">(</span><span class="quote">"This must be uuidv4"</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span> <span class="keyword">if</span><span class="sign">;</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Determine the version of a given UUID.
+</pre>
+
+<hr />
+<a name="UUIDs2eUUID2fVersion5fNumber"></a>
+<a name="robo25"></a><h2>UUIDs.UUID/Version_Number [ Methods ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo1">UUIDs.UUID</a> ] [ <a href="./robo_methods.html#robo_top_of_doc">Methods</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <strong>Version_Number</strong> <span class="sign">(</span>Self <span class="sign">:</span> UUID<span class="sign">)</span> <span class="keyword">return</span> Natural <span class="keyword">with</span> Inline<span class="sign">;</span>
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    Natural - The number corrosponding to the version or 0 if unknown.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> My_UUID<span class="sign">.</span><strong>Version_Number</strong> <span class="sign">&lt;</span> 3 <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       Put_Line <span class="sign">(</span><span class="quote">"Please use UUIDv4 or greater"</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span> <span class="keyword">if</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the version number of the UUID
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eLibrary5fVersion"></a>
+<a name="robo26"></a><h2>UUIDs/UUIDs.Library_Version [ Constants ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_constants.html#robo_top_of_doc">Constants</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    <a href="#robo24">Version</a> of the current library.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   Library_Version <span class="sign">:</span> <span class="keyword">constant</span> String <span class="sign">:</span><span class="sign">=</span> <span class="quote">"1.0.0"</span><span class="sign">;</span>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eMax"></a>
+<a name="robo27"></a><h2>UUIDs/UUIDs.Max [ Constants ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_constants.html#robo_top_of_doc">Constants</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    The Max UUID is a special form of UUID that is specified to have all
+    128 bits set to 1 (FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF), as per
+    RFC 9562 5.10: <a href="https://www.ietf.org/rfc/rfc9562.html#section-5.10">https://www.ietf.org/rfc/rfc9562.html#section-5.10</a>
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   Max <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    UID <span class="sign">:</span> UUID <span class="sign">:</span><span class="sign">=</span> Max<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> UID<span class="sign">.</span><a href="#robo21">Is_Max</a> <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       Put_Line <span class="sign">(</span><span class="quote">"This should be true."</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span> <span class="keyword">if</span><span class="sign">;</span>
+</pre>
+<p class="item_name">NOTES</p>
+<pre>    Max UUID value falls within the range of Future variant rather than
+    variant RFC9562.
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eNamespace5fUUIDs"></a>
+<a name="robo28"></a><h2>UUIDs/UUIDs.Namespace_UUIDs [ Constants ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_constants.html#robo_top_of_doc">Constants</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Namespace Reference <a href="#robo2">UUIDs</a> as per Section 6.6 RFC 9562:
+    <a href="https://www.ietf.org/rfc/rfc9562.html#section-6.6">https://www.ietf.org/rfc/rfc9562.html#section-6.6</a>
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   Namespace_DNS  <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  DNS Namespace UUID<span class="sign">:</span> 6ba7b810<span class="sign">-</span>9dad<span class="sign">-</span>11d1<span class="sign">-</span>80b4<span class="sign">-</span>00c04fd430c8
+   Namespace_URL  <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  URL Namespace UUID<span class="sign">:</span> 6ba7b811<span class="sign">-</span>9dad<span class="sign">-</span>11d1<span class="sign">-</span>80b4<span class="sign">-</span>00c04fd430c8
+   Namespace_OID  <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  OID Namespace UUID<span class="sign">:</span> 6ba7b812<span class="sign">-</span>9dad<span class="sign">-</span>11d1<span class="sign">-</span>80b4<span class="sign">-</span>00c04fd430c8
+   Namespace_X500 <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  X500 Namespace UUID<span class="sign">:</span> 6ba7b814<span class="sign">-</span>9dad<span class="sign">-</span>11d1<span class="sign">-</span>80b4<span class="sign">-</span>00c04fd430c8
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  Create uuidv3 <span class="sign">(</span>md5<span class="sign">)</span> <span class="keyword">and</span> uuidv5 <span class="sign">(</span>sha1<span class="sign">)</span> using DNS <span class="keyword">and</span> URL namespaces
+   <span class="sign">-</span><span class="sign">-</span>    D <span class="sign">:</span> UUID <span class="sign">:</span><span class="sign">=</span> V3<span class="sign">.</span>UUID1 <span class="sign">(</span>Namespace_DNS<span class="sign">,</span> <span class="quote">"www.getada.dev"</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    U <span class="sign">:</span> UUID <span class="sign">:</span><span class="sign">=</span> <a href="./uuids-v5_ads.html#robo35">V5.UUID5</a> <span class="sign">(</span>Namespace_URL<span class="sign">,</span> <span class="quote">"https://ada-lang.io/docs/arm"</span><span class="sign">)</span><span class="sign">;</span>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eNil"></a>
+<a name="robo29"></a><h2>UUIDs/UUIDs.Nil [ Constants ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_constants.html#robo_top_of_doc">Constants</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    The Nil UUID is special form of UUID that is specified to have all
+    128 bits set to zero (00000000-0000-0000-0000-000000000000) as per
+    RFC 9562 5.9: <a href="https://www.ietf.org/rfc/rfc9562.html#section-5.9">https://www.ietf.org/rfc/rfc9562.html#section-5.9</a>
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   Nil <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    UID <span class="sign">:</span> UUID <span class="sign">:</span><span class="sign">=</span> Nil<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> UID<span class="sign">.</span>Is_Nill <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       Put_Line <span class="sign">(</span><span class="quote">"This should be true."</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span> <span class="keyword">if</span><span class="sign">;</span>
+</pre>
+<p class="item_name">NOTES</p>
+<pre>    Nil UUID value falls within the range of the NCS variant rather than
+    variant RFC9562.
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eReference5fUUIDs"></a>
+<a name="robo30"></a><h2>UUIDs/UUIDs.Reference_UUIDs [ Constants ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_constants.html#robo_top_of_doc">Constants</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    These are example / reference <a href="#robo2">UUIDs</a> as per Appendex A1-A8 and B1-B2
+    of RFC 9562:
+    * <a href="https://www.ietf.org/rfc/rfc9562.html#appendix-A">https://www.ietf.org/rfc/rfc9562.html#appendix-A</a>
+    * tps://www.ietf.org/rfc/rfc9562.html#appendix-B            
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   Ref_V1 <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  Gregorian reference UUID C232AB00<span class="sign">-</span>9414<span class="sign">-</span>11EC<span class="sign">-</span>B3C8<span class="sign">-</span>9F6BDECED846
+   Ref_V2 <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  DCE reference UUID 000004D2<span class="sign">-</span>92E8<span class="sign">-</span>21ED<span class="sign">-</span>8100<span class="sign">-</span>3FDB0085247E
+   Ref_V3 <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  MD5 reference UUID 5DF41881<span class="sign">-</span>3AED<span class="sign">-</span>3515<span class="sign">-</span>88A7<span class="sign">-</span>2F4A814CF09E
+   Ref_V4 <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  Random reference UUID 919108F7<span class="sign">-</span>52D1<span class="sign">-</span>4320<span class="sign">-</span>9BAC<span class="sign">-</span>F847DB4148A8
+   Ref_V5 <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  SHA1 reference UUID 2ED6657D<span class="sign">-</span>E927<span class="sign">-</span>568B<span class="sign">-</span>95E1<span class="sign">-</span>2665A8AEA6A2
+   Ref_V6 <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  Reordered Gregorian reference UUID 1EC9414C<span class="sign">-</span>232A<span class="sign">-</span>6B00<span class="sign">-</span>B3C8<span class="sign">-</span>9F6BDECED846
+   Ref_V7 <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  Unix time reference UUID 017F22E2<span class="sign">-</span>79B0<span class="sign">-</span>7CC3<span class="sign">-</span>98C4<span class="sign">-</span>DC0C0C07398F
+   Ref_V8_Time_Based <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  Custom time based UUID example from RFC 9562<span class="sign">-</span>B
+   <span class="sign">-</span><span class="sign">-</span>  https<span class="sign">:</span><span class="sign">/</span><span class="sign">/</span>www<span class="sign">.</span>ietf<span class="sign">.</span>org<span class="sign">/</span>rfc<span class="sign">/</span>rfc9562<span class="sign">.</span>html<span class="sign">#</span>appendix<span class="sign">-</span>B
+   <span class="sign">-</span><span class="sign">-</span>  2489E9AD<span class="sign">-</span>2EE2<span class="sign">-</span>8E00<span class="sign">-</span>8EC9<span class="sign">-</span>32D5F69181C0
+   Ref_V8_Name_Based <span class="sign">:</span> <span class="keyword">constant</span> UUID<span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>  Custom name based UUID example from RFC 9562<span class="sign">-</span>B
+   <span class="sign">-</span><span class="sign">-</span>  https<span class="sign">:</span><span class="sign">/</span><span class="sign">/</span>www<span class="sign">.</span>ietf<span class="sign">.</span>org<span class="sign">/</span>rfc<span class="sign">/</span>rfc9562<span class="sign">.</span>html<span class="sign">#</span>appendix<span class="sign">-</span>B
+   <span class="sign">-</span><span class="sign">-</span>  5C146B14<span class="sign">-</span>3C52<span class="sign">-</span>8AFD<span class="sign">-</span>938A<span class="sign">-</span>375D0DF1FBF6
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> Ref_V1<span class="sign">.</span><a href="#robo24">Version</a> <span class="sign">=</span> Gregorian <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       Put_Line <span class="sign">(</span><span class="quote">"It must be true."</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span> <span class="keyword">if</span><span class="sign">;</span>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eVersion5fN"></a>
+<a name="robo31"></a><h2>UUIDs/UUIDs.Version_N [ Constants ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_constants.html#robo_top_of_doc">Constants</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    <a href="#robo24">Version</a> number constants so you don't have to remember the name.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   Version_1 <span class="sign">:</span> <span class="keyword">constant</span> Versions <span class="sign">:</span><span class="sign">=</span> Gregorian<span class="sign">;</span>
+   Version_2 <span class="sign">:</span> <span class="keyword">constant</span> Versions <span class="sign">:</span><span class="sign">=</span> DCE<span class="sign">;</span>
+   Version_3 <span class="sign">:</span> <span class="keyword">constant</span> Versions <span class="sign">:</span><span class="sign">=</span> MD5<span class="sign">;</span>
+   Version_4 <span class="sign">:</span> <span class="keyword">constant</span> Versions <span class="sign">:</span><span class="sign">=</span> Random<span class="sign">;</span>
+   Version_5 <span class="sign">:</span> <span class="keyword">constant</span> Versions <span class="sign">:</span><span class="sign">=</span> SHA_1<span class="sign">;</span>
+   Version_6 <span class="sign">:</span> <span class="keyword">constant</span> Versions <span class="sign">:</span><span class="sign">=</span> Gregorian_Reordered<span class="sign">;</span>
+   Version_7 <span class="sign">:</span> <span class="keyword">constant</span> Versions <span class="sign">:</span><span class="sign">=</span> Unix_Time<span class="sign">;</span>
+   Version_8 <span class="sign">:</span> <span class="keyword">constant</span> Versions <span class="sign">:</span><span class="sign">=</span> Custom<span class="sign">;</span>
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  Print the name <span class="keyword">of</span> version 4<span class="sign">:</span>
+   <span class="sign">-</span><span class="sign">-</span>    Put_Line <span class="sign">(</span>Version_4<span class="squote">'Image);
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eFrom5fField"></a>
+<a name="robo39"></a><h2>UUIDs/UUIDs.From_Field [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Creates a UUID from a raw Octet field
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> From_Field <span class="sign">(</span>From <span class="sign">:</span> UUID_Field<span class="sign">)</span> <span class="keyword">return</span> UUID<span class="sign">;</span>
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    From   - The UUID_Field to create the UUID from
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    UUID - The resulting UUID object created by the UUID_Field.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    U <span class="sign">:</span> UUID <span class="sign">:</span><span class="sign">=</span> From_Field <span class="sign">(</span><span class="sign">[</span>16<span class="sign">#</span>6b<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>a7<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>b8<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>10<span class="sign">#</span><span class="sign">,</span>
+   <span class="sign">-</span><span class="sign">-</span>                            16<span class="sign">#</span>9d<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>ad<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>11<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>d1<span class="sign">#</span><span class="sign">,</span>
+   <span class="sign">-</span><span class="sign">-</span>                            16<span class="sign">#</span>80<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>b4<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>00<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>c0<span class="sign">#</span><span class="sign">,</span>
+   <span class="sign">-</span><span class="sign">-</span>                            16<span class="sign">#</span>4f<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>d4<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>30<span class="sign">#</span><span class="sign">,</span> 16<span class="sign">#</span>c8<span class="sign">#</span><span class="sign">]</span><span class="sign">)</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  This will print<span class="sign">:</span> <span class="quote">"6BA7B810-9DAD-11D1-80B4-00C04FD430C8"</span>
+   <span class="sign">-</span><span class="sign">-</span>    Put_Line <span class="sign">(</span>U<span class="squote">'Image);
+</pre>
+<p class="item_name">NOTES</p>
+<pre>    This method takes no consideration towards whether the resulting UUID
+    is to any specification thus you must have the variant and version
+    set in this data.  This is fine if you know what the raw data is for
+    the UUIDv1 - UUIDv7 that you wish to create, but if you would like to
+    implement a UUIDv8 with the version and variant set automatically,
+    please refer to <a href="#robo2">UUIDs</a>/<a href="./uuids-v8_ads.html#robo38">V8.UUID8</a>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eFrom5fStream5fElement5fArray"></a>
+<a name="robo40"></a><h2>UUIDs/UUIDs.From_Stream_Element_Array [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Creates a UUID from a given Stream Element Array.
+    It must be the same size as the UUID_Field, which is 128 bits.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> From_Stream_Element_Array <span class="sign">(</span>From <span class="sign">:</span> Ada<span class="sign">.</span>Streams<span class="sign">.</span>Stream_Element_Array<span class="sign">)</span>
+      <span class="keyword">return</span> UUID <span class="keyword">with</span> Pre <span class="sign">=</span><span class="sign">&gt;</span> From<span class="squote">'Size = UUID_Field'</span>Size<span class="sign">;</span>
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    From   - The Steam_Element_Array to create the UUID from
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    UUID - The resulting UUID object created by the element array.
+</pre>
+<p class="item_name">NOTES</p>
+<pre>    This method takes no consideration towards whether the resulting UUID
+    is to any specification thus you must have the variant and version
+    set in this data.  This is fine if you know what the raw data is for
+    the UUIDv1 - UUIDv7 that you wish to create, but if you would like to
+    implement a UUIDv8 with the version and variant set automatically,
+    please refer to <a href="#robo2">UUIDs</a>/<a href="./uuids-v8_ads.html#robo38">V8.UUID8</a>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eFrom5fString"></a>
+<a name="robo41"></a><h2>UUIDs/UUIDs.From_String [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">DESCRIPTION</p>
+<pre>    Creates a UUID from its string representation.
+    It must be in the format described in <a href="#robo14">UUIDs.UUID_String</a> which is:
+    xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    Otherwise an assertion exception will be raised.
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> From_String <span class="sign">(</span>From <span class="sign">:</span> UUID_String<span class="sign">)</span> <span class="keyword">return</span> UUID
+      <span class="keyword">with</span> Pre <span class="sign">=</span><span class="sign">&gt;</span> From <span class="keyword">in</span> UUID_String<span class="sign">;</span>
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    From   - The string to create the UUID from in the following format:
+             xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    UUID - The resulting UUID object represented by the string.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    U1 <span class="sign">:</span> UUID <span class="sign">:</span><span class="sign">=</span> From_String <span class="sign">(</span><span class="quote">"017F22E2-79B0-7CC3-98C4-DC0C0C07398F"</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="sign">-</span><span class="sign">-</span>  This will print <span class="quote">"UNIX_TIME"</span>
+   <span class="sign">-</span><span class="sign">-</span><span class="sign">-</span>   Put_Line <span class="sign">(</span>U1<span class="sign">.</span><a href="#robo24">Version</a><span class="squote">'Image);
+</pre>
+<p class="item_name">NOTES</p>
+<pre>    This method takes no consideration towards whether the resulting UUID
+    is to any specification thus you must have the variant and version
+    set in this data.  This is fine if you know what the raw data is for
+    the UUIDv1 - UUIDv7 that you wish to create, but if you would like to
+    implement a UUIDv8 with the version and variant set automatically,
+    please refer to <a href="#robo2">UUIDs</a>/<a href="./uuids-v8_ads.html#robo38">V8.UUID8</a>
+</pre>
+
+<hr />
+<a name="UUIDs2fUUIDs2eVersion5fNumber"></a>
+<a name="robo42"></a><h2>UUIDs/UUIDs.Version_Number [ Subprograms ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="#robo2">UUIDs</a> ] [ <a href="./robo_subprograms.html#robo_top_of_doc">Subprograms</a> ]</p>
+<p class="item_name">SOURCE</p>
+<pre class="source">   <span class="keyword">function</span> <a href="#robo25">Version_Number</a> <span class="sign">(</span>Which <span class="sign">:</span> Versions<span class="sign">)</span> <span class="keyword">return</span> Natural<span class="sign">;</span>
+</pre>
+<p class="item_name">PARAMETERS</p>
+<pre>    Which - <a href="#robo24">Version</a> to retrieve the number from
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>    Natural - The number corrosponding to the version.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre class="source">   <span class="sign">-</span><span class="sign">-</span>    A_Version <span class="sign">:</span> Versions <span class="sign">:</span><span class="sign">=</span> <span class="sign">.</span><span class="sign">.</span><span class="sign">.</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">if</span> <a href="#robo25">Version_Number</a> <span class="sign">(</span>A_Version<span class="sign">)</span> <span class="sign">&lt;</span> 3 <span class="keyword">then</span>
+   <span class="sign">-</span><span class="sign">-</span>       Put_Line <span class="sign">(</span><span class="quote">"Please use UUIDv4 or greater"</span><span class="sign">)</span><span class="sign">;</span>
+   <span class="sign">-</span><span class="sign">-</span>    <span class="keyword">end</span> <span class="keyword">if</span>
+</pre>
+<p class="item_name">FUNCTION</p>
+<pre>    Retrieve the version number of a specific version enumeration
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./src/uuids.ads with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.44 on 2025-01-06 23:40:46</p>
+</div> <!-- footer -->
+</body>
+</html>

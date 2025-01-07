@@ -12,4 +12,10 @@ package body UUIDs.V8 is
       Normalize (Result, Custom);
       return Result;
    end UUID8;
+   function UUID8 (From : UUID_String) return UUID is
+      Result : UUID := From_String (From);
+   begin
+      Normalize (Result, Custom);
+      return Result;
+   end UUID8;
 end UUIDs.V8;
