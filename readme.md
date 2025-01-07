@@ -55,11 +55,15 @@ type Variants is (
 
 ### UUID Type
 
-The UUID type itself is a private tagged type containing the UUID.  By default all bits are set to 0.  You can create a UUID using several different methods.  It has the following available member functions:
+The UUID type itself is a private tagged type containing the UUID.  By default all bits are set to 0.  You can create a UUID using several different methods.  It has the following available [member functions](https://aj-ianozi.github.io/uuids/uuids_ads.html#robo1):
 ```ada
    function As_Field (Self : UUID) return UUID_Field with Inline;
    function As_Element_Array (Self : UUID) return Ada.Streams.Stream_Element_Array;
-
+   function Version (Self : UUID) return Versions;
+   function Version_Number (Self : UUID) return Natural with Inline;
+   function Variant (Self : UUID) return Variants;
+   function Is_Nil (Self : UUID) return Boolean;
+   function Is_Max (Self : UUID) return Boolean;
 ```
 
 Each UUID version's initiator is split into its own package, so to create a UUIDv4 UUID, include "UUID.V4" and call "UUID.V4.UUID4".  Here are some examples:
