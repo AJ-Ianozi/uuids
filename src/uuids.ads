@@ -29,7 +29,7 @@ package UUIDs is
 
    --  ****d* UUIDs/UUIDs.Library_Version
    --  SOURCE
-   Library_Version : constant String := "0.1.0-dev";
+   Library_Version : constant String := "1.0.0";
    --  DESCRIPTION
    --    Version of the current library.
    --  ****

@@ -1,16 +1,23 @@
 # UUIDs: a Universally Unique IDentifiers (UUIDs) library written in Ada
 
-**Note: This library is a work-in-progress**
-
 This library is an attempt to implement UUIDs to the RFC 9562 standard located here: https://www.ietf.org/rfc/rfc9562.html
 
-As of this writing it can identify any UUID's version or variant and create any kind of UUID in the spec: UUIDv1, UUIDv3, UUIDv4, UUIDv5, UUIDv7, UUIDv7 and UUIDv8.
+As of this writing it can identify any UUID's version or variant and create any kind of UUID in the spec:
+* UUIDv1: Gregorian Timestamp with constant data
+* UUIDv3: MD5-hashed
+* UUIDv4: Randomly-generated
+* UUIDv5: SHA1-hashed
+* UUIDv6: Gregorian Timestamp with constant data with better database locality 
+* UUIDv7: UNIX Timestamp with random data, optimized for database locality
+* UUIDv8: Custom UUIDs
 
-All of my unit tests are passing, but am open to more tests plus additional validation on other platforms, especially big endian.
+All of my unit tests are passing on all platforms I have attempted, but am open to more tests plus additional validation on other platforms, especially big endian.
 
 ## Installation
 
 ### With [Alire](https://alire.ada.dev/)
+
+**NOTE: This will be in the alire index soon**
 
 If you would like to try this library out, feel free to clone the repo and build with alire.  Once it's in the index I can update this with instructions on how to actually use it.
 Don't have Alire yet? Get it with [GetAda](https://www.getada.dev).

@@ -1,5 +1,4 @@
 pragma Ada_2022;
-with Ada.Text_IO;
 with Ada.Integer_Text_IO;
 with Ada.Characters.Handling;
 with Ada.Unchecked_Conversion;
