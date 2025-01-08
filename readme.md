@@ -114,10 +114,10 @@ declare
    --  Create a random UUID
    U4 : UUID := V4.UUID4;
    --  Create a hashed UUID
-   V5 : UUID := V5.UUID5 (UUID_DNS, "example.org");
+   V5 : UUID := V5.UUID5 (Namespace_DNS, "example.org");
 begin
    if Uid = Uid2 then
-      --  This will print: "They're 6BA7B810-9DAD-11D1-80B4-00C04FD430C8"
+      --  This will print: "They're 6ba7b810-9dad-11d1-80b4-00c04fd430c8"
       Put_Line ("They're " & U1'Image);
    end if;
    if U4.Version = Random then
@@ -125,7 +125,7 @@ begin
       Put_Line (U4'Image & " is a random UUID which is number " & V_Num'Image);
    end if;
 
-   --  This prints "AAD03681-8B63-5304-89E0-8CA8F49461B5"
+   --  This prints "aad03681-8b63-5304-89e0-8ca8f49461b5"
    Put_Line (My_UUID_5'Image);
 end;
 ```
