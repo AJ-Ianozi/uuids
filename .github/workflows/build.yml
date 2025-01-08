@@ -1,0 +1,113 @@
+name: Build and test uuid library
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  ###  Build on linux
+  build-linux_x86_64:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up alire
+      uses: alire-project/setup-alire@v3
+
+    - name: Build uuid
+      run: >
+        cd tests &&
+        alr -n update &&
+        alr -n build --release &&
+        bin/tests
+
+  ###  x86-64 MacOS
+  build-macos_x86_64:
+    runs-on: macos-13
+
+    steps: 
+    
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up alire
+        uses: alire-project/setup-alire@v3
+
+      - name: Build uuid
+        run: >
+          cd tests &&
+          alr -n update &&
+          alr -n build --release &&
+          bin/tests
+
+  build-macos_aarch64:
+    runs-on: macos-14
+
+    steps: 
+    
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up alire
+        uses: robinraju/release-downloader@v1
+        with:
+          repository: 'alire-project/alire'
+          fileName: '*-bin-aarch64-macos.zip'
+          out-file-path: 'alire'
+          latest: true
+          extract: true
+
+      - name: Add alire to path
+        run: >
+          chmod +x alire/bin/alr &&
+          echo "$PWD/alire/bin" >> $GITHUB_PATH
+
+      - name: Configure alire
+        run: alr -n toolchain --disable-assistant --select
+
+      - name: Build uuid
+        run: >
+          cd tests &&
+          alr -n update &&
+          alr -n build --release &&
+          bin/tests
+
+##  Test on windows
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up alire
+        uses: alire-project/setup-alire@v1
+
+      - name: Build getada
+        run: >
+          cd tests &&
+          alr -n update &&
+          alr -n build --release &&
+          bin/tests
+
+###  Don't have toolchains for gnat on aarch64
+#  build-linux_aarch64:
+#    runs-on: macos-14
+#    
+#    steps: 
+#    
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#
+#      - name: Install Homebrew
+#        run: |
+#         brew tap messense/macos-cross-toolchains
+#         brew install aarch64-unknown-linux-gnu
+#         aarch64-linux-gnu-gcc -v
