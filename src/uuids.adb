@@ -1,8 +1,9 @@
 pragma Ada_2022;
 with Ada.Text_IO;
-with Ada.Integer_Text_IO;
-with Ada.Strings.Fixed;
 with Ada.Streams;
+with Ada.Strings.Fixed;
+with Ada.Integer_Text_IO;
+with Ada.Characters.Handling;
 with Ada.Unchecked_Conversion;
 package body UUIDs is
    use Interfaces;
@@ -71,6 +72,7 @@ package body UUIDs is
       procedure Randomize_Node is
       begin
          Data := Node (Generate_Octets (Node'First, Node'Last));
+         Node_Is_Set := True;
       end;
 
    end Node_Container;
@@ -209,6 +211,7 @@ package body UUIDs is
       (Buffer : in out Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;
        Value  : UUID)
    is
+      use Ada.Characters.Handling;
       --  Convert an octet into a string
       function Octet_To_Hex (Item : Octet) return Octet_String is
          Raw    : String (1 .. 5);
@@ -223,23 +226,23 @@ package body UUIDs is
    begin
       --  Iterate through each section, adding dashes in-between
       for I in 0 .. 3 loop
-         Buffer.Put (Octet_To_Hex (Value.Data (I)));
+         Buffer.Put (To_Lower (Octet_To_Hex (Value.Data (I))));
       end loop;
       Buffer.Put ("-");
       for I in 4 .. 5 loop
-         Buffer.Put (Octet_To_Hex (Value.Data (I)));
+         Buffer.Put (To_Lower (Octet_To_Hex (Value.Data (I))));
       end loop;
       Buffer.Put ("-");
       for I in 6 .. 7 loop
-         Buffer.Put (Octet_To_Hex (Value.Data (I)));
+         Buffer.Put (To_Lower (Octet_To_Hex (Value.Data (I))));
       end loop;
       Buffer.Put ("-");      
       for I in 8 .. 9 loop
-         Buffer.Put (Octet_To_Hex (Value.Data (I)));
+         Buffer.Put (To_Lower (Octet_To_Hex (Value.Data (I))));
       end loop;
       Buffer.Put ("-");
       for I in 10 .. 15 loop
-         Buffer.Put (Octet_To_Hex (Value.Data (I)));
+         Buffer.Put (To_Lower (Octet_To_Hex (Value.Data (I))));
       end loop;
    end Print_UUID;
 

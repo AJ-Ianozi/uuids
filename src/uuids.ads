@@ -158,13 +158,13 @@ package UUIDs is
    --    The default value of a UUID on initialization is
    --    Nil (00000000-0000-0000-0000-000000000000)
    --  USAGE
-   --    U1 : UUID := From_String ("6ba7b810-9dad-11d1-80b4-00c04fd430c8");
+   --    U1 : UUID := From_String ("6BA7B810-9DAD-11D1-80B4-00C04FD430C8");
    --    U2 : UUID := From_Field ([16#6b#, 16#a7#, 16#b8#, 16#10#,
    --                             16#9d#, 16#ad#, 16#11#, 16#d1#,
    --                             16#80#, 16#b4#, 16#00#, 16#c0#,
    --                             16#4f#, 16#d4#, 16#30#, 16#c8#])
    --    if U1 = U2 then
-   --       --  This will print: "They're 6BA7B810-9DAD-11D1-80B4-00C04FD430C8"
+   --       --  This will print: "They're 6ba7b810-9dad-11d1-80b4-00c04fd430c8"
    --       Put_Line ("They're " & U1'Image);
    --    end if;
    --  METHODS
