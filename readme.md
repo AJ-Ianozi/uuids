@@ -4,9 +4,9 @@
 
 This library is an attempt to implement UUIDs to the RFC 9562 standard located here: https://www.ietf.org/rfc/rfc9562.html
 
-As of this writing it can identify any UUID's version or variant and create any kind of UUID in the spec **on my system**: UUIDv1, UUIDv3, UUIDv4, UUIDv5, UUIDv7, UUIDv7 and UUIDv8.
+As of this writing it can identify any UUID's version or variant and create any kind of UUID in the spec: UUIDv1, UUIDv3, UUIDv4, UUIDv5, UUIDv7, UUIDv7 and UUIDv8.
 
-I'm building out unit tests to validate if this works on other systems but the unit tests are still being built out.
+All of my unit tests are passing, but am open to more tests plus additional validation on other platforms, especially big endian.
 
 ## Installation
 
@@ -17,6 +17,8 @@ Don't have Alire yet? Get it with [GetAda](https://www.getada.dev).
 
 ### Without Alire
 The library's single dependency (aside from being GNAT-centric) is [System_Random](https://github.com/AntonMeep/system_random/) to provide a cross-platform method of cryptographically secure random data, so you'll have to download that as well as all of the `ads` and `adb` files in the `src` directory and include them in the source of your project.
+
+The GNAT-centric libraries are:
 
 ## Usage
 
@@ -176,6 +178,16 @@ Here is how I would set the generator to pure random:
 ```ada
 UUIDs.Settings.Set_Random (UUIDs.Pure_Random);
 ```
+
+## Compatibility and performance
+This library utilizes Ada-2022 and the following GNAT-specific libraries:
+- GNAT.MD5 for UUIDv3
+- GNAT.SHA1 for UUIDv5
+- Ada.Calendar.Conversions for UUIDv1, UUIDv6, and UUIDv7
+
+If I can find a way to securely and portably accomplish MD5, SHA1, and retrieving the UNIX time without these three above, this may change in the future.
+
+It also uses `Ada.Integer_Text_IO.Put`, `Ada.Integer_Text_IO.Get`, and `Ada.Characters.Handling.To_Lower` to convert between octets and base16 strings (see `uuids.adb`) which may not be performant.  I'm open to changing that too :smiley:
 
 ## Contribute
 Feel free to open an issue if you find any bugs or comment if you have any comments or enhancements. Please bare in mind that I am still writing my unit tests, so this is currently not fully tested yet.
