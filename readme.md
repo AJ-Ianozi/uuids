@@ -97,11 +97,12 @@ The UUID type itself is a private tagged type containing the UUID.  By default a
 
 Each UUID version's initiator is split into its own package, so to create a UUIDv4 UUID, include "UUID.V4" and call "UUID.V4.UUID4".  Here are some examples:
 ```ada
+pragma Ada_2022;
 with UUIDs; use UUIDs;
 with UUIDs.V4;
 with UUIDs.V5;
 with Ada.Text_IO; use Ada.Text_IO;
-declare
+procedure Uuid_Test is
    --  This will hold our version number
    V_Num : Natural;
    --  Create a UUID from an existing UUID string
@@ -110,15 +111,16 @@ declare
    Uid2 : UUID := From_Field ([16#6b#, 16#a7#, 16#b8#, 16#10#,
                               16#9d#, 16#ad#, 16#11#, 16#d1#,
                               16#80#, 16#b4#, 16#00#, 16#c0#,
-                              16#4f#, 16#d4#, 16#30#, 16#c8#])
+                              16#4f#, 16#d4#, 16#30#, 16#c8#]);
    --  Create a random UUID
    U4 : UUID := V4.UUID4;
    --  Create a hashed UUID
-   V5 : UUID := V5.UUID5 (Namespace_DNS, "example.org");
+   U5 : UUID := V5.UUID5 (Namespace_DNS, "example.org");
+
 begin
    if Uid = Uid2 then
       --  This will print: "They're 6ba7b810-9dad-11d1-80b4-00c04fd430c8"
-      Put_Line ("They're " & U1'Image);
+      Put_Line ("They're " & Uid'Image);
    end if;
    if U4.Version = Random then
       V_Num := U4.Version_Number;
@@ -126,8 +128,8 @@ begin
    end if;
 
    --  This prints "aad03681-8b63-5304-89e0-8ca8f49461b5"
-   Put_Line (My_UUID_5'Image);
-end;
+   Put_Line (U5'Image);
+end Uuid_Test;
 ```
 
 ### Constants
