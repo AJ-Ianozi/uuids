@@ -17,9 +17,29 @@ All of my unit tests are passing on all platforms I have attempted, but am open 
 
 ### With [Alire](https://alire.ada.dev/)
 
-**NOTE: This will be in the alire index soon**
+Be sure that you're using the latest community index:
+```sh
+alr index --update-all
+```
 
-If you would like to try this library out, feel free to clone the repo and build with alire.  Once it's in the index I can update this with instructions on how to actually use it.
+To download and build:
+```sh
+alr get --build uuids
+```
+You can run the unit tests located in the `tests` directory via `alr run`:
+```sh
+alr get uuids
+cd uuids*
+cd tests
+alr run
+```
+If it works, it will report "All tests passed."
+
+To include it as a dependency in your Alire project:
+```sh
+alr with uuids
+```
+
 Don't have Alire yet? Get it with [GetAda](https://www.getada.dev).
 
 ### Without Alire
