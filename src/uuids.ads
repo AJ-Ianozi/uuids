@@ -1,9 +1,9 @@
---------------------------------------------------------------------------------
---     UUIDs - An implementation of https://www.ietf.org/rfc/rfc9562.html     --
---------------------------------------------------------------------------------
---  Copyright (c) 2024-2025 AJ Ianozi                                         --
---  Licensed under the MIT License.  See attached LICENSE for details.        --
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+--     UUIDs - An implementation of https://www.ietf.org/rfc/rfc9562.html
+-------------------------------------------------------------------------------
+--  Copyright (c) 2024-2025 AJ Ianozi
+--  Licensed under the MIT License.  See attached LICENSE for details.
+-------------------------------------------------------------------------------
 pragma Ada_2022;
 pragma Assertion_Policy (Check);
 with Interfaces;
@@ -369,7 +369,6 @@ package UUIDs is
    --    end if;
    --  ****
 
-
    --  ****d* UUIDs/UUIDs.Max
    --  SOURCE
    Max : constant UUID;
@@ -388,7 +387,7 @@ package UUIDs is
    --  ****
 
    --  A filled / max reference UUID
-   --  
+   --
 
    --  ****d* UUIDs/UUIDs.Namespace_UUIDs
    --  DESCRIPTION
@@ -414,7 +413,7 @@ package UUIDs is
    --    These are example / reference UUIDs as per Appendex A1-A8 and B1-B2
    --    of RFC 9562:
    --    * https://www.ietf.org/rfc/rfc9562.html#appendix-A
-   --    * https://www.ietf.org/rfc/rfc9562.html#appendix-B            
+   --    * https://www.ietf.org/rfc/rfc9562.html#appendix-B
    --  EXAMPLE
    --    if Ref_V1.Version = Gregorian then
    --       Put_Line ("It must be true.");
@@ -447,10 +446,10 @@ package UUIDs is
    --  ****t* UUIDs/UUIDs.Random_Method
    --  SOURCE
    type Random_Method is (
-      Random_Seed, --  Uses Ada.Numerics.Discrete_Random, seeded by system's
-                   --  source of randomness.
+      Random_Seed,   --  Uses Ada.Numerics.Discrete_Random, seeded by system's
+                     --  source of randomness.
 
-      Pure_Random --  Only use the system's source of randomness.
+      Pure_Random    --  Only use the system's source of randomness.
       );
    --  DESCRIPTION
    --     An enumeration of options passed into UUIDs.Settings.Set_Random
@@ -537,9 +536,9 @@ private
    --  Sets the version and variant of the UUID
    procedure Normalize (Item : in out UUID; To : Versions);
 
-   -----------------------------------------------------------------------------
-   --                               Randomizer                                --
-   -----------------------------------------------------------------------------
+   ----------------------------------------------------------------------------
+   --                               Randomizer                                -
+   ----------------------------------------------------------------------------
 
    --  This is used by the randomizer.
    type Random_Octet is array (Natural range <>) of aliased Octet;
@@ -566,9 +565,9 @@ private
       Seed_Is_Set : Boolean := False;
    end Randomizer;
 
-   -----------------------------------------------------------------------------
-   --                        version-specific items                           --
-   -----------------------------------------------------------------------------
+   ----------------------------------------------------------------------------
+   --                        version-specific items                           -
+   ----------------------------------------------------------------------------
 
    --  uuidv1 and uuidv6 require a 48-bit spatially unique identifier.
    --  Occupies bits 80 through 127 (octets 10-15).
@@ -597,9 +596,9 @@ private
    --  This will be added to the unix timestamp.
    Gregorian_Epoch_To_Unix : constant := 16#1B21DD213814000#;
 
---------------------------------------------------------------------------------
---                                 Constants                                  --
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+--                                 Constants                                  -
+-------------------------------------------------------------------------------
 
    Nil : constant UUID := (Data => [others => 0]);
    Max : constant UUID := (Data => [others => 16#FF#]);

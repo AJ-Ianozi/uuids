@@ -1,7 +1,5 @@
 with GNAT.SHA1;
-with Interfaces;
 package body UUIDs.V5 is
-   use Interfaces;
    function UUID5 (Namespace : UUID; Name : String) return UUID is
       Our_SHA1 : GNAT.SHA1.Context;
    begin

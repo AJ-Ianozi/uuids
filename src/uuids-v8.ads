@@ -1,9 +1,9 @@
---------------------------------------------------------------------------------
---     UUIDs - An implementation of https://www.ietf.org/rfc/rfc9562.html     --
---------------------------------------------------------------------------------
---  Copyright (c) 2025 AJ Ianozi                                              --
---  Licensed under the MIT License.  See attached LICENSE for details.        --
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+--     UUIDs - An implementation of https://www.ietf.org/rfc/rfc9562.html
+-------------------------------------------------------------------------------
+--  Copyright (c) 2025 AJ Ianozi
+--  Licensed under the MIT License.  See attached LICENSE for details.
+-------------------------------------------------------------------------------
 pragma Assertion_Policy (Check);
 with Ada.Streams;
 --  ****h* UUIDs/UUIDs.V8

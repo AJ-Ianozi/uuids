@@ -1,6 +1,5 @@
 with GNAT.MD5;
 package body UUIDs.V3 is
-   use Interfaces;
    function UUID3 (Namespace : UUID; Name : String) return UUID is
       Our_MD5 : GNAT.MD5.Context;
    begin
@@ -10,7 +9,7 @@ package body UUIDs.V3 is
          Digest : constant GNAT.MD5.Binary_Message_Digest :=
                      GNAT.MD5.Digest (Our_MD5);
          Result : UUID := From_Field (To_UUID_Field (Digest));
-       begin
+      begin
          Normalize (Result, MD5);
          return Result;
       end;

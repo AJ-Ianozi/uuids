@@ -1,7 +1,5 @@
 pragma Ada_2022;
 with Ada.Text_IO;
-with Ada.Streams;
-with Ada.Strings.Fixed;
 with Ada.Integer_Text_IO;
 with Ada.Characters.Handling;
 with Ada.Unchecked_Conversion;
@@ -16,9 +14,9 @@ package body UUIDs is
       function Get_Random return Random_Method is (Which_Random);
    end Settings;
 
-   -----------------------------------------------------------------------------
-   --                               Randomizer                                --
-   -----------------------------------------------------------------------------
+   ----------------------------------------------------------------------------
+   --                               Randomizer                                -
+   ----------------------------------------------------------------------------
    protected body Randomizer is
       function  Seed_Set return Boolean is (Seed_Is_Set);
 
@@ -41,7 +39,7 @@ package body UUIDs is
                Random_Gen.Reset (Gen, Convert (Random_Int));
             end;
          end if;
-      end;
+      end Set_Seed;
 
       function Gen_Random return Octet is (Random_Gen.Random (Gen));
 
@@ -49,7 +47,7 @@ package body UUIDs is
 
    function Generate_Octets (From : Natural; To : Natural)
    return Random_Octet is
-      Result : aliased Random_Octet:= [From .. To => 0];
+      Result : aliased Random_Octet := [From .. To => 0];
    begin
       case Settings.Get_Random is
          when Pure_Random =>
@@ -73,14 +71,13 @@ package body UUIDs is
       begin
          Data := Node (Generate_Octets (Node'First, Node'Last));
          Node_Is_Set := True;
-      end;
+      end Randomize_Node;
 
    end Node_Container;
 
-
-   -----------------------------------------------------------------------------
-   --                                Utilities                                --
-   -----------------------------------------------------------------------------
+   ----------------------------------------------------------------------------
+   --                                Utilities                                -
+   ----------------------------------------------------------------------------
    function To_Element_Array (Item : UUID_Field)
       return Ada.Streams.Stream_Element_Array
    is
@@ -96,7 +93,6 @@ package body UUIDs is
    function To_UUID_Field (Item : Ada.Streams.Stream_Element_Array)
       return UUID_Field
    is
-      use Ada.Streams;
       Result : UUID_Field;
       Idx : Natural := Result'First;
    begin
@@ -121,7 +117,7 @@ package body UUIDs is
 
    function As_Field (Self : UUID) return UUID_Field is (Self.Data);
 
-   function As_Element_Array (Self : UUID)   
+   function As_Element_Array (Self : UUID)
       return Ada.Streams.Stream_Element_Array
    is (To_Element_Array (Self.Data));
 
@@ -236,7 +232,7 @@ package body UUIDs is
       for I in 6 .. 7 loop
          Buffer.Put (To_Lower (Octet_To_Hex (Value.Data (I))));
       end loop;
-      Buffer.Put ("-");      
+      Buffer.Put ("-");
       for I in 8 .. 9 loop
          Buffer.Put (To_Lower (Octet_To_Hex (Value.Data (I))));
       end loop;

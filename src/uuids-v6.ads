@@ -1,9 +1,9 @@
---------------------------------------------------------------------------------
---     UUIDs - An implementation of https://www.ietf.org/rfc/rfc9562.html     --
---------------------------------------------------------------------------------
---  Copyright (c) 2025 AJ Ianozi                                              --
---  Licensed under the MIT License.  See attached LICENSE for details.        --
---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+--     UUIDs - An implementation of https://www.ietf.org/rfc/rfc9562.html
+-------------------------------------------------------------------------------
+--  Copyright (c) 2025 AJ Ianozi
+--  Licensed under the MIT License.  See attached LICENSE for details.
+-------------------------------------------------------------------------------
 --  ****h* UUIDs/UUIDs.V6
 --  SOURCE
 package UUIDs.V6 is
@@ -20,7 +20,7 @@ package UUIDs.V6 is
    --    compatibility with UUIDv1 is required.  Otherwise, please consider
    --    using UUIDv7 instead for random + time based UUIDs for improved
    --    entropy characteristics over UUIDv1 or UUIDv6.
-   --    
+   --
    --  FUNCTION
    --    UUIDv6 is similar field-compatible with UUIDv1 except re-ordered for
    --    improved DB locality.  The timestamp still utilizes the Gregorian

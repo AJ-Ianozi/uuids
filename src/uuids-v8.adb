@@ -1,4 +1,3 @@
-with Ada.Streams;
 package body UUIDs.V8 is
    function UUID8 (From : UUID_Field) return UUID is
       Result : UUID := From_Field (From);
