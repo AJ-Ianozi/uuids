@@ -1,5 +1,5 @@
 name = "uuids"
-description = "Implementations of RFC 9562 Universally Unique IDentifiers (UUIDs)"
+description = "Implementation of RFC 9562 Universally Unique IDentifiers (UUIDs)"
 version = "1.0.0"
 
 authors = ["AJ Ianozi"]
