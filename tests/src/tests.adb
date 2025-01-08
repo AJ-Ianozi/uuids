@@ -8,7 +8,7 @@ pragma Ada_2022;
 
 with Ada.Assertions;
 with Ada.Strings;
-with Ada.Strings.Fixed;
+with Ada.Strings.Unbounded;
 with Ada.Strings.Equal_Case_Insensitive;
 with Ada.Text_IO;
 with UUIDs;
@@ -23,11 +23,16 @@ with UUIDs.V8;
 procedure Tests is
    use UUIDs;
    use Ada.Assertions;
-    My_UUID : UUID := V8.UUID8 ("DEADBEEF-DEAF-DEED-FEED-C0FFEEABCDEF");
+   use Ada.Strings.Unbounded;
+
+   --  For testing UUIDv3 and v5
+   type Comparator is record
+      Namespace : UUID;
+      Name      : Unbounded_String;
+      Result    : UUID;
+   end record;
+   type Compares is array (Positive range <>) of Comparator;
 begin
-   --    --  This will print "DEADBEEF-DEAF-8EED-BEED-C0FFEEABCDEF"
-    ada.text_io.Put_Line (My_UUID'Image);
-return;
    --  Confirm reference UUIDs
    declare
 
@@ -197,92 +202,326 @@ return;
    Assert (Ref_V8_Name_Based = From_String (Ref_V8_Name_Based'Image));
    Assert (Ref_V8_Time_Based = From_String (Ref_V8_Time_Based'Image));
 
-   --  Test UUID v1 (better testing coming soon)
+   --  Test UUID v1
    declare
-      Our_V1_1 : constant UUID := V1.UUID1;
-      Our_V1_2 : constant UUID := V1.UUID1;
+      UID1 : UUID;
+      UID2 : UUID;
    begin
-      Ada.Text_IO.Put_Line ("v1: " & Our_V1_1'Image);
-      Ada.Text_IO.Put_Line ("v1: " & Our_V1_2'Image);
-   end;
-
-   --  Wait a few moments
-   delay 3.0;
-   declare
-      Our_V1_1 : constant UUID := V1.UUID1;
-      Our_V1_2 : constant UUID := V1.UUID1;
-   begin
-      Ada.Text_IO.Put_Line ("v1: " & Our_V1_1'Image);
-      Ada.Text_IO.Put_Line ("v1: " & Our_V1_2'Image);
+      UID1 := V1.UUID1;
+      delay 0.3;
+      UID2 := V1.UUID1;
+      Assert (UID1.Version = Gregorian and UID2.Version = Gregorian);
+      Assert (UID1.Variant = RFC9562 and UID2.Variant = RFC9562);
+      Assert (UID1 /= UID2 and
+               not UID1.Is_Nil and
+               not UID1.Is_Max and
+               not UID2.Is_Max and
+               not UID1.Is_Nil);
+      --  Verify the node didn't change between the two
+      Assert (UID1.As_Field (10 .. 15) = UID2.As_Field (10 .. 15));
+      --  Verify that the timestamp is different
+      Assert (UID1.As_Field (0 .. 7) /= UID2.As_Field (0 .. 7));
    end;
 
    --  Test constant UUID v3
    declare
-      Our_V3 : constant UUID := V3.UUID3 (Namespace_DNS, "example.org");
+      Single_UID : constant UUID := V3.UUID3 (Namespace_DNS, "I'm cool");
+      Compare : constant Compares (1 .. 24) := [
+         (Namespace => Namespace_DNS,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("e5bebb49-12dd-3e10-9265-988265d2202a")),
+
+         (Namespace => Namespace_DNS,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("dc8e5f02-b0db-32fc-9f00-7aeab575125e")),
+
+         (Namespace => Namespace_DNS,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("1d892a74-d740-3198-9c1f-db4f132ff577")),
+
+         (Namespace => Namespace_DNS,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("4385125b-dd1e-3025-880f-3311517cc8d5")),
+
+         (Namespace => Namespace_URL,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("e12c3be9-4bcb-36b7-970c-9d83d1cc4bd1")),
+
+         (Namespace => Namespace_URL,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("8b718387-1379-3a45-b1ac-a25eecfaf118")),
+
+         (Namespace => Namespace_URL,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("75928c39-60c0-3f76-841c-d39978344ad4")),
+
+         (Namespace => Namespace_URL,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("c8e1eb22-a627-3daa-884c-2205cf78d075")),
+
+         (Namespace => Namespace_OID,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("f2eb1d74-8a55-3a45-8035-845f9f619ffe")),
+
+         (Namespace => Namespace_OID,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("79fdb00c-7465-3b30-83a8-4b66b2c35c07")),
+
+         (Namespace => Namespace_OID,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("6092ef77-7674-3674-b9e6-53f05c6805b1")),
+
+         (Namespace => Namespace_OID,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("0fb26833-a9c2-3115-ad21-a082e21213f3")),
+
+         (Namespace => Namespace_X500,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("08816f8b-17b0-3420-bf74-17d7054aa67d")),
+
+         (Namespace => Namespace_X500,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("c24f0670-a105-3d71-b5ae-dd5fd869a9e6")),
+
+         (Namespace => Namespace_X500,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("efa59605-8544-377b-8ef3-1b3320576e0f")),
+
+         (Namespace => Namespace_X500,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("66533a7d-66bb-3586-8959-592be1b228e1")),
+
+         (Namespace => Max,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("cd396a51-90fd-34a0-89ba-9223dbd1ca06")),
+
+         (Namespace => Max,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("ad3571fd-e290-3ca4-9aa8-2a92fc3d7c8b")),
+
+         (Namespace => Max,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("e2f3224c-cadb-3acc-be2d-3648311d3f1e")),
+
+         (Namespace => Max,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("682609d6-862f-39e9-8158-d2f3b0e17e71")),
+
+         (Namespace => Nil,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("cefe1825-8ee4-3dd5-8bb5-528884fcd9d9")),
+
+         (Namespace => Nil,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("5f47f178-d3e0-3e99-a3ab-12d81694a0fe")),
+
+         (Namespace => Nil,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("f0199e08-7188-36e4-90d4-75a855b806ed")),
+
+         (Namespace => Nil,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("19826852-5007-3022-a72a-212f66e9fac3"))
+      ];
    begin
-      null;
+      Assert (Single_UID.Version = MD5);
+      Assert (Single_UID.Variant = RFC9562);
+      Assert (for all X of Compare =>
+               X.Result = V3.UUID3 (X.Namespace, To_String (X.Name)));
    end;
+
    --  Test UUID v4 with random seed twice:
    Settings.Set_Random (Random_Seed);
    declare
-      Our_V4_1 : constant UUID := V4.UUID4;
-      Our_V4_2 : constant UUID := V4.UUID4;
+      UID1 : constant UUID := V4.UUID4;
+      UID2 : constant UUID := V4.UUID4;
    begin
-      Ada.Text_IO.Put_Line (Our_V4_1'Image);
-      Ada.Text_IO.Put_Line (Our_V4_2'Image);
-      Assert (Our_V4_1.Version_Number = 4);
-      Assert (Our_V4_2.Version_Number = 4);
-      Assert (Our_V4_1.Variant = RFC9562);
-      Assert (Our_V4_2.Variant = RFC9562);
+      Assert (UID1 /= UID2 and
+               not UID1.Is_Nil and
+               not UID1.Is_Max and
+               not UID2.Is_Max and
+               not UID1.Is_Nil);
+      Assert (UID1.Version = Random);
+      Assert (UID2.Version = Random);
+      Assert (UID1.Variant = RFC9562);
+      Assert (UID2.Variant = RFC9562);
    end;
    --  UID with pure random
    Settings.Set_Random (Pure_Random);
    declare
-      Our_V4_1 : constant UUID := V4.UUID4;
-      Our_V4_2 : constant UUID := V4.UUID4;
+      UID1 : constant UUID := V4.UUID4;
+      UID2 : constant UUID := V4.UUID4;
    begin
-      Ada.Text_IO.Put_Line (Our_V4_1'Image);
-      Ada.Text_IO.Put_Line (Our_V4_2'Image);
-      Assert (Our_V4_1.Version_Number = 4);
-      Assert (Our_V4_2.Version_Number = 4);
-      Assert (Our_V4_1.Variant = RFC9562);
-      Assert (Our_V4_2.Variant = RFC9562);
+      Assert (UID1 /= UID2 and
+               not UID1.Is_Nil and
+               not UID1.Is_Max and
+               not UID2.Is_Max and
+               not UID1.Is_Nil);
+      Assert (UID1.Version = Random);
+      Assert (UID2.Version = Random);
+      Assert (UID1.Variant = RFC9562);
+      Assert (UID2.Variant = RFC9562);
    end;
 
    --  Test UUID v5
-declare
-   Our_V5 : constant UUID := V5.UUID5 (Namespace_DNS, "example.org");
-begin
-   Ada.Text_IO.Put_Line ("V5: " & Our_V5'Image);
-end;
+   declare
+      Single_UID : constant UUID := V5.UUID5 (Namespace_DNS, "I'm cool");
+      Compare : constant Compares (1 .. 24) := [
+         (Namespace => Namespace_DNS,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("64c89628-b30f-5d57-a3e4-4d663cfeb2eb")),
+
+         (Namespace => Namespace_DNS,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("0e64db66-9cc6-52f0-ace7-7fde5a31b034")),
+
+         (Namespace => Namespace_DNS,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("08d517c3-ac51-54e8-9036-a65fc977ab11")),
+
+         (Namespace => Namespace_DNS,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("6af613b6-569c-5c22-9c37-2ed93f31d3af")),
+
+         (Namespace => Namespace_URL,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("7a7d30cd-dd67-57bc-9149-d48b6b6527e3")),
+
+         (Namespace => Namespace_URL,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("592234c1-e983-5e6c-af78-8c6209cc548e")),
+
+         (Namespace => Namespace_URL,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("a82b9066-2032-5bba-8bf9-8e865b09025c")),
+
+         (Namespace => Namespace_URL,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("035c4ea0-d73b-5bde-bd6f-c806b04f2ec3")),
+
+         (Namespace => Namespace_OID,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("1b3999bb-5be7-5631-b205-6f69683c3a81")),
+
+         (Namespace => Namespace_OID,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("b487084d-9185-52d8-816e-342f59707588")),
+
+         (Namespace => Namespace_OID,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("bf547c8b-0674-5afe-97ad-d6e7556e56fa")),
+
+         (Namespace => Namespace_OID,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("bf428e1d-f221-55de-a77f-a61755a4d727")),
+
+         (Namespace => Namespace_X500,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("37a76058-6a3e-5ac0-ae79-f8781652381c")),
+
+         (Namespace => Namespace_X500,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("457aa4e6-bf07-55f7-8fc6-0bf4cf0eefd2")),
+
+         (Namespace => Namespace_X500,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("c0384da2-62c9-530d-ad6b-ba5dc47538c9")),
+
+         (Namespace => Namespace_X500,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("2f6a5b5e-39e3-5fbd-b0de-a2578b24667d")),
+
+         (Namespace => Max,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("cbd65d96-22e7-55df-9fe5-47a4dfa97584")),
+
+         (Namespace => Max,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("fa49a752-45af-5165-8801-a3101e9ca32f")),
+
+         (Namespace => Max,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("706aaa8e-c4db-5ff2-b3f3-a89d85fcd6bf")),
+
+         (Namespace => Max,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("3127a5db-4d56-5264-bb59-035fe36bd275")),
+
+         (Namespace => Nil,
+         Name      => To_Unbounded_String ("getada.dev"),
+         Result     => From_String("e3fa8334-f67d-5ae7-8aba-eb7d7c3244cd")),
+
+         (Namespace => Nil,
+         Name      => To_Unbounded_String ("https://ada-lang.io"),
+         Result     => From_String("78bef44f-284e-5112-912f-9649b9c636ec")),
+
+         (Namespace => Nil,
+         Name      => To_Unbounded_String ("12345"),
+         Result     => From_String("3de2cac0-91a8-51e9-81f8-74e9b87e2a1b")),
+
+         (Namespace => Nil,
+         Name      => To_Unbounded_String ("0"),
+         Result    => From_String ("b6c54489-38a0-5f50-a60a-fd8d76219cae"))
+      ];
+   begin
+      Assert (Single_UID.Version = SHA_1);
+      Assert (Single_UID.Variant = RFC9562);
+      Assert (for all X of Compare =>
+               X.Result = V5.UUID5 (X.Namespace, To_String (X.Name)));
+   end;
+
+    --  Test UUID v6
+   declare
+      UID1 : UUID;
+      UID2 : UUID;
+   begin
+      UID1 := V6.UUID6;
+      delay 0.3;
+      UID2 := V6.UUID6;
+      Assert (UID1.Version = Gregorian_Reordered and UID2.Version = Gregorian_Reordered);
+      Assert (UID1.Variant = RFC9562 and UID2.Variant = RFC9562);
+      Assert (UID1 /= UID2 and
+               not UID1.Is_Nil and
+               not UID1.Is_Max and
+               not UID2.Is_Max and
+               not UID1.Is_Nil);
+      --  Verify the node didn't change between the two
+      Assert (UID1.As_Field (10 .. 15) = UID2.As_Field (10 .. 15));
+      --  Verify that the timestamp is different
+      Assert (UID1.As_Field (0 .. 7) /= UID2.As_Field (0 .. 7));
+   end;
 
    --  UUID v7
+
    declare
-      Our_V7 : constant UUID := V7.UUID7;
+      UID1 : UUID;
+      UID2 : UUID;
    begin
-      Ada.Text_IO.Put_Line ("V7: " & Our_V7'Image);
+      UID1 := V7.UUID7;
+      delay 0.3;
+      UID2 := V7.UUID7;
+      Assert (UID1.Version = Unix_Time and UID2.Version = Unix_Time);
+      Assert (UID1.Variant = RFC9562 and UID2.Variant = RFC9562);
+      Assert (UID1 /= UID2 and
+               not UID1.Is_Nil and
+               not UID1.Is_Max and
+               not UID2.Is_Max and
+               not UID1.Is_Nil);
+      --  Verify the random data is random
+      Assert (UID1.As_Field (6 .. 15) /= UID2.As_Field (6 .. 15));
+      --  Verify that the timestamp is different
+      Assert (UID1.As_Field (0 .. 5) /= UID2.As_Field (0 .. 5));
    end;
 
-   --  Test UUID v6
    declare
-      Our_V6_1 : constant UUID := V6.UUID6;
-      Our_V6_2 : constant UUID := V6.UUID6;
+      UID1 : constant UUID := From_String ("DEADBEEF-DEAF-DEED-FEED-C0FFEEABCDEF");
+      UID2 : constant UUID := V8.UUID8 ("DEADBEEF-DEAF-DEED-FEED-C0FFEEABCDEF");
    begin
-      Ada.Text_IO.Put_Line ("v6: " & Our_V6_1'Image);
-      Ada.Text_IO.Put_Line ("v6: " & Our_V6_2'Image);
+      Assert (UID1.Version /= Custom and UID2.Version = Custom);
+      Assert (UID1.Variant /= RFC9562 and UID2.Variant = RFC9562);
+      Assert (UID1 /= UID2 and not UID1.Is_Nil and not UID1.Is_Max);
+      Assert (UID2 = From_String ("DEADBEEF-DEAF-8EED-BEED-C0FFEEABCDEF"));
    end;
-
-   --  Wait a few moments
-   delay 3.0;
-   declare
-      Our_V6_1 : constant UUID := V6.UUID6;
-      Our_V6_2 : constant UUID := V6.UUID6;
-   begin
-      Ada.Text_IO.Put_Line ("v6: " & Our_V6_1'Image);
-      Ada.Text_IO.Put_Line ("v6: " & Our_V6_2'Image);
-   end;
-
-
 
    Ada.Text_IO.Put_Line ("All Tests passed.");
 end Tests;
